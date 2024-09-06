@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  web:
+    image: nginx:alpine
+    container_name: static-site
+    ports:
+      - "80:80"
+    volumes:
+      - ./DockerStaticSite/default.conf:/etc/nginx/conf.d/default.conf
+      - ./DockerStaticSite/index.html:/usr/share/nginx/html/index.html
+    restart: always
