@@ -7,5 +7,5 @@ services:
       - "80:80"
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
-      - ./index.html:/usr/share/nginx/html/index.html
+      - .:/usr/share/nginx/html  # Maps the current directory
     restart: always
