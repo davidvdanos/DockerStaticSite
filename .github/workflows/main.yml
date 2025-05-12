@@ -1,20 +1,29 @@
-name: Build Static Site Docker Container
+name: Deploy Static Site to GitHub Pages
 
 on:
   push:
     branches:
       - master
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
 
-      - name: Build Docker image
-        run: docker build -t dockerstatic-test:latest .
+      - name: Upload static files
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: '.' # Adjust if your HTML lives in a subfolder
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
